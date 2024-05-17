@@ -1,6 +1,7 @@
 #ifndef PONG_H
 #define PONG_H
 
+#include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include "game_state.h"
@@ -14,8 +15,8 @@ using namespace std;
 class Pong
 {
 public:
-    const static int SCREEN_WIDTH = 2048;
-    const static int SCREEN_HEIGHT = 1536;
+    const static int SCREEN_WIDTH = 1024;
+    const static int SCREEN_HEIGHT = 768;
     static void start();
     static void gameLoop();
     enum State
