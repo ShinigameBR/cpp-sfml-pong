@@ -34,9 +34,8 @@ void Pong::gameLoop()
     {
         float timeElapsed = _clock.restart().asSeconds();
         _window.clear(Color(255, 255, 255));
-
-        // Because we don't want to change our state during a frame
         GameState *currentState = _stateInstances[_state];
+
         // Handle input
         Event event;
         while (_window.pollEvent(event))
@@ -47,8 +46,10 @@ void Pong::gameLoop()
             }
             currentState->handleInput(&event);
         }
+
         // Update our entities
         currentState->update(timeElapsed);
+
         // Draw our new entities
         currentState->draw(&_window);
         _window.display();

@@ -9,6 +9,7 @@ void SplashscreenState::init()
     }
     _sprite.setTexture(_texture);
 }
+
 void SplashscreenState::handleInput(Event *event)
 {
     if (event->type == Event::KeyPressed || event->type == Event::MouseButtonPressed)
@@ -16,7 +17,9 @@ void SplashscreenState::handleInput(Event *event)
         Pong::setState(Pong::Menu);
     }
 }
+
 void SplashscreenState::update(float timeElapsed) {}
+
 void SplashscreenState::draw(RenderWindow *window)
 {
     window->draw(_sprite);

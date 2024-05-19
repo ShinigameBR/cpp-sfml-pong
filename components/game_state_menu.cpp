@@ -12,6 +12,7 @@ void MenuState::init()
     _playSprite.setPosition(211, 245);
     _exitSprite.setPosition(211, 434);
 }
+
 void MenuState::handleInput(Event *event)
 {
     if (event->type == Event::MouseButtonPressed)
@@ -28,7 +29,9 @@ void MenuState::handleInput(Event *event)
         }
     }
 }
+
 void MenuState::update(float timeElapsed) {}
+
 void MenuState::draw(RenderWindow *window)
 {
     window->draw(_playSprite);

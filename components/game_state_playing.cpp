@@ -2,46 +2,23 @@
 
 void PlayingState::init()
 {
-    if (!_player1Texture.loadFromFile("./assets/player.png"))
-    {
-        cout << "Error while loading assets" << endl;
-        return;
-    }
-    _player1Sprite.setTexture(_player1Texture);
-    _player1Sprite.setPosition(25, 359);
+    Field *field = new Field();
+    field->setPosition(0, 0);
+    _visibleObjectManager.add("field", field);
+    Player *player1 = new Player(field->getTop() + 10, field->getBottom() - 10);
+    player1->setPosition(25, 384);
+    _visibleObjectManager.add("player1", player1);
 }
+
 void PlayingState::handleInput(Event *event)
 {
-    if (event->type == Event::KeyReleased)
-    {
-        _playerDirection = DIRECTION_NONE;
-    }
-    else if (event->type == Event::KeyPressed)
-    {
-        if (event->key.code == Keyboard::Up)
-        {
-            _playerDirection = DIRECTION_UP;
-        }
-        else if (event->key.code == Keyboard::Down)
-        {
-            _playerDirection = DIRECTION_DOWN;
-        }
-    }
+    _visibleObjectManager.handleInputAll(event);
 }
 void PlayingState::update(float timeElapsed)
 {
-    float velocity = 0.0f;
-    if (_playerDirection == DIRECTION_UP)
-    {
-        velocity = _playerSpeed * -1;
-    }
-    else if (_playerDirection == DIRECTION_DOWN)
-    {
-        velocity = _playerSpeed;
-    }
-    _player1Sprite.move(0, velocity * timeElapsed);
+    _visibleObjectManager.updateAll(timeElapsed);
 }
 void PlayingState::draw(RenderWindow *window)
 {
-    window->draw(_player1Sprite);
+    _visibleObjectManager.drawAll(window);
 }
