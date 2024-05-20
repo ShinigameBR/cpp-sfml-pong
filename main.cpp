@@ -2,6 +2,7 @@
 
 int main()
 {
+    srand(time(NULL));
     Pong::start();
     return 0;
 }

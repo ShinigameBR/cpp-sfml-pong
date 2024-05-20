@@ -17,6 +17,7 @@
         "${fileDirname}/components/visible_object_manager.cpp",
         "${fileDirname}/entities/field.cpp",
         "${fileDirname}/entities/player.cpp",
+        "${fileDirname}/entities/ball.cpp",
         "-lsfml-graphics",
         "-lsfml-audio",
         "-lsfml-window",
