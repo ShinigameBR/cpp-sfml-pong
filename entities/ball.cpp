@@ -9,6 +9,9 @@ Ball::Ball(Rect<float> constraints) : VisibleObject("./assets/ball.png")
 
 void Ball::update(float timeElapsed)
 {
+    if (isOut)
+        return;
+
     float velocity = _speed * timeElapsed;
     float angleInRadian = _angle * M_PI / 180.0f;
     float velocityX = velocity * cos(angleInRadian) - 0 * sin(angleInRadian);
@@ -20,12 +23,36 @@ void Ball::update(float timeElapsed)
         _angle = 360 - _angle;
         velocityY *= -1;
     }
-    // Temporarily handle bounce with the side walls
-    if (getLeft() + velocityX <= _constraints.left || getRight() + velocityX >= _constraints.left + _constraints.width)
+    // Temporary handling bounce with the right wall
+    if (getRight() + velocityX >= _constraints.left + _constraints.width)
     {
         _angle = (180 - _angle) % 360;
         velocityX *= -1;
     }
+    // Handle loss condition on the left wall
+    if (getLeft() + velocityX <= _constraints.left)
+    {
+        isOut = true;
+    }
 
     move(velocityX, velocityY);
+}
+
+void Ball::collideWith(VisibleObject *target)
+{
+    if (isOut)
+        return;
+
+    if (!dynamic_cast<Player *>(target))
+        return;
+    float playerCenterY = (target->getTop() + target->getBottom()) / 2;
+    float ballCenterY = (getTop() + getBottom()) / 2;
+    float distDiff = ballCenterY - playerCenterY;
+    float maxDiff = target->getBoundingRect().height;
+    float normalizedDiff = distDiff / maxDiff;
+    _angle = (int)(normalizedDiff * 90); // Between -45 and 45 degree
+
+    _speed += 100;
+    if (_speed > _maxSpeed)
+        _speed = _maxSpeed;
 }
