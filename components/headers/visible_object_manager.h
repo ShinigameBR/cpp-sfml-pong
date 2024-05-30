@@ -17,4 +17,5 @@ public:
 private:
     map<string, VisibleObject *> _objects;
 };
+
 #endif

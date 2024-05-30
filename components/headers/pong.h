@@ -28,9 +28,11 @@ public:
         Exiting
     };
     static void setState(State s);
+    static GameState *getState();
 
 private:
     static State _state;
+    static GameState *_currentState;
     static map<State, GameState *> _stateInstances;
     static RenderWindow _window;
     static Clock _clock;

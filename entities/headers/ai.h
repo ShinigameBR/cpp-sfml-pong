@@ -1,13 +1,15 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef AI_H
+#define AI_H
 
+#include "../../components/headers/pong.h"
 #include "../../components/headers/visible_object.h"
+#include "ball.h"
 
-class Player : public VisibleObject
+class Ai : public VisibleObject
 {
 public:
-    Player(float constraintTop, float constraintBottom);
-    void handleInput(Event *event);
+    Ai(float constraintTop, float constraintBottom);
+    void runAI();
     void update(float timeElapsed);
 
 private:

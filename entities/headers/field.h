@@ -9,4 +9,5 @@ public:
     Field();
     void update(float timeElapsed);
 };
+
 #endif

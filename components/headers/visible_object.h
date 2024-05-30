@@ -30,4 +30,5 @@ private:
     Sprite _sprite;
     bool _isLoaded;
 };
+
 #endif

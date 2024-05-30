@@ -16,4 +16,5 @@ private:
     Texture _texture;
     Sprite _sprite;
 };
+
 #endif

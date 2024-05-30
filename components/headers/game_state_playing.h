@@ -6,6 +6,7 @@
 #include "../../entities/headers/field.h"
 #include "../../entities/headers/player.h"
 #include "../../entities/headers/ball.h"
+#include "../../entities/headers/ai.h"
 
 class PlayingState : public GameState
 {
@@ -14,5 +15,8 @@ public:
     void handleInput(Event *event) override;
     void update(float timeElapsed) override;
     void draw(RenderWindow *window) override;
+    auto *drawBall(Field *field);
+    void endLoopLogic() override;
 };
+
 #endif

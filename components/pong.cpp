@@ -3,6 +3,7 @@
 RenderWindow Pong::_window;
 Clock Pong::_clock;
 Pong::State Pong::_state = Uninitialized;
+GameState *Pong::_currentState;
 map<Pong::State, GameState *> Pong::_stateInstances;
 
 void Pong::start()
@@ -30,12 +31,11 @@ void Pong::start()
 
 void Pong::gameLoop()
 {
-    while (_window.isOpen())
+    while (_state != Exiting)
     {
         float timeElapsed = _clock.restart().asSeconds();
         _window.clear(Color(255, 255, 255));
-        GameState *currentState = _stateInstances[_state];
-
+        _currentState = _stateInstances[_state];
         // Handle input
         Event event;
         while (_window.pollEvent(event))
@@ -44,16 +44,19 @@ void Pong::gameLoop()
             {
                 _state = Exiting;
             }
-            currentState->handleInput(&event);
+            _currentState->handleInput(&event);
         }
 
         // Update our entities
-        currentState->update(timeElapsed);
+        _currentState->update(timeElapsed);
 
         // Draw our new entities
-        currentState->draw(&_window);
+        _currentState->draw(&_window);
         _window.display();
+        _currentState->endLoopLogic();
     }
 }
 
 void Pong::setState(Pong::State s) { _state = s; }
+
+GameState *Pong::getState() { return _currentState; }

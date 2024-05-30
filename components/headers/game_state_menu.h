@@ -18,4 +18,5 @@ private:
     Texture _exitTexture;
     Sprite _exitSprite;
 };
+
 #endif
